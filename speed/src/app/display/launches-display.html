@@ -1,0 +1,36 @@
+ <span *ngIf="!esDetalle()">
+  <ul>
+    <p>
+      Número de resultados: {{launches.length}}
+    </p>
+    <p>
+        <input value="FECHA MAYOR" type="button" (click)="onClickOrdenarMayor(launches)">
+        <input value="FECHA MENOR" type="button" (click)="onClickOrdenarMenor(launches)">
+    </p>
+
+    <li *ngFor="let launch of launches">
+      <p>
+        <input value={{launch.name}} type="button" (click)="onClickShowDetails(launch)">
+      </p>
+    </li>
+  </ul>
+</span>
+
+<span *ngIf="esDetalle()">
+  <p>
+    DETALLE DE LANZAMIENTO
+  </p>
+  <p>
+    -------
+  </p>
+  <p *ngFor="let launch of launches">
+      <span>Id vuelo: {{launch.id}}  --  Nombre vuelo: {{launch.name}} -- Estado: {{launch.status}}</span>
+      <span *ngIf="tieneAgencia(launch)"> -- Agencia: {{launch.lsp.name}}</span>
+      <span *ngIf="tieneMisiones(launch)">
+        <p>          MISSIONS</p>
+        <p *ngFor="let mission of missions">
+          <span>          * {{mission.name}}</span>
+        </p>
+      </span>
+    </p>
+</span>
